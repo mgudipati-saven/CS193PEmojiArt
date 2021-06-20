@@ -18,7 +18,7 @@ struct EmojiArtDocumentView: View {
   var body: some View {
     VStack(spacing: 0) {
       documentBody
-      palette
+      PaletteChooser(emojiFontSize: defaultEmojiFontSize)
     }
   }
 
@@ -44,7 +44,7 @@ struct EmojiArtDocumentView: View {
                   : nil)
               .font(.system(size: fontSize(for: emoji)))
               .scaleEffect(zoomScale)
-              .position(position(for: emoji, in: geometry.size))
+              .position(position(for: emoji, in: geometry))
               .onTapGesture {
                 selectedEmojis.toggleMembership(of: emoji)
               }
@@ -89,16 +89,8 @@ struct EmojiArtDocumentView: View {
 
   // MARK: - Positioning/Sizing Emoji
 
-//  private func position(for emoji: EmojiArt.Emoji, in geometry: GeometryProxy) -> CGPoint {
-//    convertFromEmojiCoordinates((emoji.x, emoji.y), in: geometry)
-//  }
-
-  private func position(for emoji: EmojiArt.Emoji, in size: CGSize) -> CGPoint {
-      var location = emoji.location
-      location = CGPoint(x: location.x * zoomScale, y: location.y * zoomScale)
-      location = CGPoint(x: location.x + size.width / 2, y: location.y + size.height / 2)
-      location = CGPoint(x: location.x + panOffset.width, y: location.y + panOffset.height)
-      return location
+  private func position(for emoji: EmojiArt.Emoji, in geometry: GeometryProxy) -> CGPoint {
+    convertFromEmojiCoordinates((emoji.x, emoji.y), in: geometry)
   }
 
   private func fontSize(for emoji: EmojiArt.Emoji) -> CGFloat {
@@ -190,6 +182,7 @@ struct EmojiArtDocumentView: View {
     DragGesture()
       .updating($gesturePanOffset) { latestDragGestureValue, gestureDragOffset, _ in
         gestureDragOffset = latestDragGestureValue.translation / zoomScale
+        document.moveEmoji(emoji, by: gestureDragOffset)
       }
       .onEnded { finalDragGestureValue in
         let dragDistance = finalDragGestureValue.translation / zoomScale
@@ -208,37 +201,7 @@ struct EmojiArtDocumentView: View {
       selectedEmojis.removeAll()
     }
   }
-
-  // MARK: - Palette
-
-  var palette: some View {
-    ScrollingEmojisView(emojis: testEmojis)
-      .font(.system(size: defaultEmojiFontSize))
-  }
-
-  let testEmojis = "😀😷🦠💉👻👀🐶🌲🌎🌞🔥🍎⚽️🚗🚓🚲🛩🚁🚀🛸🏠⌚️🎁🗝🔐❤️⛔️❌❓✅⚠️🎶➕➖🏳️"
 }
-
-struct ScrollingEmojisView: View {
-  let emojis: String
-
-  var body: some View {
-    ScrollView(.horizontal) {
-      HStack {
-        ForEach(emojis.map { String($0) }, id: \.self) { emoji in
-          Text(emoji)
-            .onDrag { NSItemProvider(object: emoji as NSString) }
-        }
-      }
-    }
-  }
-}
-
-extension EmojiArt.Emoji {
-    var fontSize: CGFloat { CGFloat(self.size) }
-    var location: CGPoint { CGPoint(x: CGFloat(x), y: CGFloat(y)) }
-}
-
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {

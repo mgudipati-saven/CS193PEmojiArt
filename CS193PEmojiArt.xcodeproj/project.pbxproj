@@ -16,6 +16,10 @@
 		132869412678B01700B4E1FE /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1328693F2678B01700B4E1FE /* UtilityExtensions.swift */; };
 		132869422678B01700B4E1FE /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132869402678B01700B4E1FE /* UtilityViews.swift */; };
 		132869442678B03B00B4E1FE /* EmojiArtDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132869432678B03B00B4E1FE /* EmojiArtDocument.swift */; };
+		13E8D276267E173E0011F389 /* PaletteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E8D275267E173E0011F389 /* PaletteStore.swift */; };
+		13E8D278267F0A8F0011F389 /* PaletteChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E8D277267F0A8F0011F389 /* PaletteChooser.swift */; };
+		13E8D27A267F42080011F389 /* PaletteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E8D279267F42080011F389 /* PaletteEditor.swift */; };
+		13E8D27C267F69D70011F389 /* PaletteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E8D27B267F69D70011F389 /* PaletteManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		1328693F2678B01700B4E1FE /* UtilityExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
 		132869402678B01700B4E1FE /* UtilityViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		132869432678B03B00B4E1FE /* EmojiArtDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocument.swift; sourceTree = "<group>"; };
+		13E8D275267E173E0011F389 /* PaletteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteStore.swift; sourceTree = "<group>"; };
+		13E8D277267F0A8F0011F389 /* PaletteChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteChooser.swift; sourceTree = "<group>"; };
+		13E8D279267F42080011F389 /* PaletteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteEditor.swift; sourceTree = "<group>"; };
+		13E8D27B267F69D70011F389 /* PaletteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +70,14 @@
 		1328692B2678A75500B4E1FE /* CS193PEmojiArt */ = {
 			isa = PBXGroup;
 			children = (
+				13E8D27B267F69D70011F389 /* PaletteManager.swift */,
 				1328692C2678A75500B4E1FE /* CS193PEmojiArtApp.swift */,
 				1328692E2678A75500B4E1FE /* EmojiArtDocumentView.swift */,
+				13E8D277267F0A8F0011F389 /* PaletteChooser.swift */,
+				13E8D279267F42080011F389 /* PaletteEditor.swift */,
 				1328693B2678A77900B4E1FE /* EmojiArt.swift */,
 				132869432678B03B00B4E1FE /* EmojiArtDocument.swift */,
+				13E8D275267E173E0011F389 /* PaletteStore.swift */,
 				1328693F2678B01700B4E1FE /* UtilityExtensions.swift */,
 				132869402678B01700B4E1FE /* UtilityViews.swift */,
 				1328693D2678A7AB00B4E1FE /* EmojiArt.Background.swift */,
@@ -154,12 +166,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1328693C2678A77900B4E1FE /* EmojiArt.swift in Sources */,
+				13E8D27C267F69D70011F389 /* PaletteManager.swift in Sources */,
+				13E8D276267E173E0011F389 /* PaletteStore.swift in Sources */,
+				13E8D27A267F42080011F389 /* PaletteEditor.swift in Sources */,
 				1328693E2678A7AB00B4E1FE /* EmojiArt.Background.swift in Sources */,
 				1328692F2678A75500B4E1FE /* EmojiArtDocumentView.swift in Sources */,
 				132869412678B01700B4E1FE /* UtilityExtensions.swift in Sources */,
 				132869442678B03B00B4E1FE /* EmojiArtDocument.swift in Sources */,
 				1328692D2678A75500B4E1FE /* CS193PEmojiArtApp.swift in Sources */,
 				132869422678B01700B4E1FE /* UtilityViews.swift in Sources */,
+				13E8D278267F0A8F0011F389 /* PaletteChooser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

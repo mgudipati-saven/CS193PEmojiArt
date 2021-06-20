@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct CS193PEmojiArtApp: App {
-  let document = EmojiArtDocument()
+  @StateObject var document = EmojiArtDocument()
+  @StateObject var paletteStore = PaletteStore(named: "default")
 
   var body: some Scene {
     WindowGroup {
       EmojiArtDocumentView(document: document)
+        .environmentObject(paletteStore)
     }
   }
 }

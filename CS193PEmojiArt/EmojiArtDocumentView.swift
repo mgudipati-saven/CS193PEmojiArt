@@ -57,6 +57,9 @@ struct EmojiArtDocumentView: View {
         drop(providers: providers, at: location, in: geometry)
       }
       .gesture(panGesture().simultaneously(with: zoomGesture()))
+      .onReceive(document.$backgroundImage) { image in
+        zoomToFit(image, in: geometry.size)
+      }
     }
   }
 

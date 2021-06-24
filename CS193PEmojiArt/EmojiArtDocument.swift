@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class EmojiArtDocument: ObservableObject
 {
@@ -80,23 +81,37 @@ class EmojiArtDocument: ObservableObject
     case fetching
   }
 
+  var cancellables = Set<AnyCancellable>()
+
   private func fetchBackgroundImageDataIfNecessary() {
     backgroundImage = nil
     switch emojiArt.background {
       case .url(let url):
         // fetch the url
+        cancellables.first?.cancel()
         backgroundImageFetchStatus = .fetching
-        DispatchQueue.global(qos: .userInitiated).async {
-          let imageData = try? Data(contentsOf: url)
-          DispatchQueue.main.async { [weak self] in
-            if self?.emojiArt.background == EmojiArt.Background.url(url) {
-              self?.backgroundImageFetchStatus = .idle
-              if imageData != nil {
-                self?.backgroundImage = UIImage(data: imageData!)
-              }
-            }
-          }
-        }
+        URLSession.shared.dataTaskPublisher(for: url)
+          .map { (data, response) in UIImage(data: data) }
+          .replaceError(with: nil)
+          .receive(on: DispatchQueue.main)
+          .sink(receiveValue: { [weak self] image in
+            self?.backgroundImage = image
+            self?.backgroundImageFetchStatus = .idle
+          })
+          .store(in: &cancellables)
+
+
+//        DispatchQueue.global(qos: .userInitiated).async {
+//          let imageData = try? Data(contentsOf: url)
+//          DispatchQueue.main.async { [weak self] in
+//            if self?.emojiArt.background == EmojiArt.Background.url(url) {
+//              self?.backgroundImageFetchStatus = .idle
+//              if imageData != nil {
+//                self?.backgroundImage = UIImage(data: imageData!)
+//              }
+//            }
+//          }
+//        }
       case .imageData(let data):
         backgroundImage = UIImage(data: data)
       case .blank:
